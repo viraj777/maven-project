@@ -10,7 +10,7 @@ pipeline {
 
     stages {
 
-        stage('ignoring git SSL'){
+        stage('Ignoring git SSL'){
             steps{
 
                  git([url: 'https://github.com/viraj777/node-todo-cicd.git', branch: 'master', disableCertificateValidation: true])
