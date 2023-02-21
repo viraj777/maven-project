@@ -35,7 +35,7 @@ pipeline {
 
          steps {
 
-           script{
+                script{
 
                 def RepoName = Version.endsWith("SNAPSHOT") ? "viraj_SNAPSHOT" : "viraj_RELEASE"
 
