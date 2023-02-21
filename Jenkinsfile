@@ -22,6 +22,21 @@ pipeline {
             }
 
         }
+
+      stage('pushing artifact to nexus'){
+
+           steps {
+
+                nexusArtifactUploader artifacts: [[artifactId: 'maven-project',
+                classifier: '', file: 'target/webapp.war', type: 'war']],
+                credentialsId: 'nexus', 
+                groupId: 'com.example.maven-project',
+                nexusUrl: 'viraj_SNAPSHOT', nexusVersion: 'nexus3',
+                protocol: 'http',
+                repository: 'viraj_SNAPSHOT',
+                version: '1.0-SNAPSHOT'
+
+          }
      }
  }
 
