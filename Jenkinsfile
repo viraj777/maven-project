@@ -10,9 +10,9 @@ pipeline {
     
     environment{
 
-       ArtifactID = readMavenPom().getartifactId()
-       GroupID = readMavenPom().getgroupId()
-       Version = readMavenPom().getversion()
+       ArtifactID = readMavenPom().getArtifactId()
+       GroupID = readMavenPom().getGroupId()
+       Version = readMavenPom().getVersion()
 
      }
 
