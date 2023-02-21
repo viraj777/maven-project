@@ -7,6 +7,14 @@ pipeline {
         maven "MAVEN"
 
     }
+    
+    environment{
+
+       ArtifactID = readMavenPom().getartifactId()
+       GroupID = readMavenPom().getgroupId()
+       Version = readMavenPom().getversion()
+
+     }
 
     stages {
 
@@ -25,16 +33,20 @@ pipeline {
 
       stage('pushing artifact to nexus'){
 
-           steps {
+         steps {
 
-                nexusArtifactUploader artifacts: [[artifactId: 'maven-project',
+           script{
+
+                def reponame = Version.ednswith('SNAPSHOT') ? "viraj_SNAPSHOT" : "viraj_RELEASE"
+
+                nexusArtifactUploader artifacts: [[artifactId: "${ArtifactID}",
                 classifier: '', file: 'webapp/target/webapp.war', type: 'war']],
                 credentialsId: 'nexus', 
-                groupId: 'com.example.maven-project',
+                groupId: "{GroupID}",
                 nexusUrl: '172.31.19.161:8081', nexusVersion: 'nexus3',
                 protocol: 'http',
-                repository: 'viraj_SNAPSHOT',
-                version: '1.0-SNAPSHOT'
+                repository: "${reponame}",
+                version: "${Version}"
 
           }
 
