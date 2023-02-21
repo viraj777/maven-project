@@ -31,7 +31,7 @@ pipeline {
                 classifier: '', file: 'target/webapp.war', type: 'war']],
                 credentialsId: 'nexus', 
                 groupId: 'com.example.maven-project',
-                nexusUrl: 'viraj_SNAPSHOT', nexusVersion: 'nexus3',
+                nexusUrl: '172.31.19.161:8081', nexusVersion: 'nexus3',
                 protocol: 'http',
                 repository: 'viraj_SNAPSHOT',
                 version: '1.0-SNAPSHOT'
