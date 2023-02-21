@@ -37,7 +37,7 @@ pipeline {
 
            script{
 
-                def reponame = Version.ednswith('SNAPSHOT') ? "viraj_SNAPSHOT" : "viraj_RELEASE"
+                def RepoName = Version.endsWith("SNAPSHOT") ? "viraj_SNAPSHOT" : "viraj_RELEASE"
 
                 nexusArtifactUploader artifacts: [[artifactId: "${ArtifactID}",
                 classifier: '', file: 'webapp/target/webapp.war', type: 'war']],
@@ -45,7 +45,7 @@ pipeline {
                 groupId: "{GroupID}",
                 nexusUrl: '172.31.19.161:8081', nexusVersion: 'nexus3',
                 protocol: 'http',
-                repository: "${reponame}",
+                repository: "${RepoName}",
                 version: "${Version}"
 
             }
