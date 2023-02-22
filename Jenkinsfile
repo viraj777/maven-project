@@ -53,6 +53,8 @@ pipeline {
 
           }
 
+       }
+
       stage('Pulling latest release artifact from nexus and creating dockerfile') {
 
          steps {
@@ -77,7 +79,6 @@ pipeline {
         
          }
 
-       }
 
      }
 
