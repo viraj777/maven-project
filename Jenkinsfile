@@ -42,8 +42,9 @@ pipeline {
                 nexusArtifactUploader artifacts: [[artifactId: "${ArtifactID}",
                 classifier: '', file: 'webapp/target/webapp.war', type: 'war']],
                 credentialsId: 'nexus', 
-                groupId: "{GroupID}",
-                nexusUrl: '172.31.19.161:8081', nexusVersion: 'nexus3',
+                groupId: "${GroupID}",
+                nexusUrl: '172.31.19.161:8081',
+                nexusVersion: 'nexus3',
                 protocol: 'http',
                 repository: "${RepoName}",
                 version: "${Version}"
@@ -52,7 +53,31 @@ pipeline {
 
           }
 
-        }
+      stage('Pulling latest release artifact from nexus and creating dockerfile') {
+
+         steps {
+
+             sshPublisher(publishers: [sshPublisherDesc(configName: 'Ansible-Controller',
+             transfers: [sshTransfer(cleanRemote: false,
+             excludes: '',
+             execCommand: 'ansible-playbook /home/cloud_user/project/makefile.yaml -i /home/cloud_user/project/inventory.txt',
+             execTimeout: 120000,
+             flatten: false,
+             makeEmptyDirs: false,
+             noDefaultExcludes: false,
+             patternSeparator: '[, ]+',
+             remoteDirectory: '',
+             remoteDirectorySDF: false,
+             removePrefix: '', sourceFiles: '')],
+             usePromotionTimestamp: false,
+             useWorkspaceInPromotion: false,
+             verbose: false)])
+
+           }
+        
+         }
+
+       }
 
      }
 
