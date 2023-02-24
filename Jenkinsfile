@@ -79,6 +79,24 @@ pipeline {
         
          }
 
+      stage('pushing image to dockerhub') {
+ 
+          agent {
+
+             label 'agent-1'
+
+             }
+
+         steps {
+
+             withCredentials([usernamePassword(credentialsId: 'Dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+                    sh "docker login -u ${env.USERNAME} -p ${env.PASSWORD}"
+                    sh "docker push virajthorat776/javaapp"
+                    }
+              }
+
+           }
+
 
      }
 
