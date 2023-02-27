@@ -104,7 +104,7 @@ pipeline {
              sshPublisher(publishers: [sshPublisherDesc(configName: 'Ansible-Controller',
              transfers: [sshTransfer(cleanRemote: false,
              excludes: '',
-             execCommand: 'ansible-playbook build.yaml -i /home/cloud_user/project/inventory.txt',
+             execCommand: 'ansible-playbook /home/cloud_user/project/build.yaml -i /home/cloud_user/project/inventory.txt',
              execTimeout: 120000,
              flatten: false,
              makeEmptyDirs: false,
