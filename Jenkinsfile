@@ -97,6 +97,31 @@ pipeline {
 
            }
 
+     stage('creating docker-compose.yaml and then initializing empty swarm on remote host') {
+
+         steps {
+
+             sshPublisher(publishers: [sshPublisherDesc(configName: 'Ansible-Controller',
+             transfers: [sshTransfer(cleanRemote: false,
+             excludes: '',
+             execCommand: 'ansible-playbook build.yaml -i /home/cloud_user/project/inventory.txt',
+             execTimeout: 120000,
+             flatten: false,
+             makeEmptyDirs: false,
+             noDefaultExcludes: false,
+             patternSeparator: '[, ]+',
+             remoteDirectory: '',
+             remoteDirectorySDF: false,
+             removePrefix: '', sourceFiles: '')],
+             usePromotionTimestamp: false,
+             useWorkspaceInPromotion: false,
+             verbose: false)])
+
+           }
+
+         }
+
+
 
      }
 
