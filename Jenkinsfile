@@ -97,7 +97,7 @@ pipeline {
 
            }
 
-     stage('creating docker-compose.yaml and then initializing empty swarm on remote host') {
+     stage('Creating docker-compose.yaml and then initializing empty swarm on remote host') {
 
          steps {
 
